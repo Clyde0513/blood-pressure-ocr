@@ -1,26 +1,37 @@
 "use client";
-
-import React, { useState } from 'react';
+import React from 'react';
 import { processOcrData } from '../lib/data-processing';
+import { BloodPressureData } from '@/types';
 
-const DataProcessing: React.FC<{ ocrResults: string[] }> = ({ ocrResults }) => {
-    const [processedData, setProcessedData] = useState<any[]>([]);
+interface Props {
+    ocrResults: string[];
+    onDataProcessed: (data: BloodPressureData[]) => void;
+}
 
+const DataProcessing: React.FC<Props> = ({ ocrResults, onDataProcessed }) => {
     const handleProcessData = () => {
         const data = processOcrData(ocrResults);
-        setProcessedData(data);
+        onDataProcessed(data);
     };
 
     return (
         <div>
-            <h2>Processed Blood Pressure Data</h2>
-            <button onClick={handleProcessData}>Process Data</button>
-            {processedData.length > 0 && (
-                <ul>
-                    {processedData.map((data, index) => (
-                        <li key={index}>{JSON.stringify(data)}</li>
-                    ))}
-                </ul>
+            <h2>Process Blood Pressure Data</h2>
+            <button 
+                onClick={handleProcessData}
+                disabled={ocrResults.length === 0}
+            >
+                Process Data
+            </button>
+            {ocrResults.length > 0 && (
+                <div className="mt-4">
+                    <h3>OCR Results:</h3>
+                    <ul>
+                        {ocrResults.map((result, index) => (
+                            <li key={index}>{result}</li>
+                        ))}
+                    </ul>
+                </div>
             )}
         </div>
     );
