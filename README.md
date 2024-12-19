@@ -49,6 +49,12 @@ blood-pressure-ocr
    npm install
    ```
 
+3. Create an .env.local file:
+```
+NEXT_PUBLIC_CHUNKR_API_URL= URLKEY
+NEXT_PUBLIC_CHUNKR_API_KEY= APIKEY
+```
+
 ## Usage
 
 To run the application, use the following command:
