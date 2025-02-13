@@ -13,7 +13,8 @@
     "react": "latest",
     "react-dom": "latest",
     "tesseract.js": "^5.1.1",
-    "typescript": "latest"
+    "typescript": "latest",
+    "unirest": "^0.6.0"
   },
   "devDependencies": {
     "@types/node": "latest",

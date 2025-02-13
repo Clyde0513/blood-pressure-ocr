@@ -7,6 +7,7 @@ export async function performOcr(file: File): Promise<string[]> {
     }
 
     try {
+        /*
         // Create form data
         const formData = new FormData();
         formData.append('file', file);
@@ -20,18 +21,22 @@ export async function performOcr(file: File): Promise<string[]> {
         formData.append("ocr_strategy", "Auto");
         formData.append("segmentation_strategy", "LayoutAnalysis");
         formData.append("target_chunk_length", "123");
+        */
 
-
+        /*HttpResponse<String> response = Unirest.post("https://api.chunkr.ai/api/v1/task/parse")
+        .header("Authorization", "<api-key>")
+        .header("Content-Type", "application/json")
+        .body("{\n  \"chunk_processing\": null,\n  \"expires_in\": 123,\n  \"file\": \"<string>\",\n  \"file_name\": \"<string>\",\n  \"high_resolution\": false,\n  \"ocr_strategy\": null,\n  \"pipeline\": null,\n  \"segment_processing\": null,\n  \"segmentation_strategy\": null\n}")
+        .asString();*/
             
         // Initial task creation
-        const taskResponse = await fetch(`${CHUNKR_API_URL}/task`, {
+        const taskResponse = await fetch(`${CHUNKR_API_URL}/task/parse`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${CHUNKR_API_KEY}`,
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data'
+                'Authorization': `${CHUNKR_API_KEY}`,
+                'Content-Type': 'application/json'
             },
-            body: formData,
+            body: `{\n  \"chunk_processing\": null,\n  \"expires_in\": 123,\n  \"file\": \"${file}\",\n \"high_resolution\": false,\n  \"ocr_strategy\": null,\n  \"pipeline\": null,\n  \"segment_processing\": null,\n  \"segmentation_strategy\": null\n}`,
             mode: 'cors',
         });
 
@@ -72,7 +77,7 @@ async function pollTaskResult(taskId: string, maxAttempts = 30): Promise<any> {
         try {
             const response = await fetch(`${CHUNKR_API_URL}/task/${taskId}`, {
                 headers: {
-                    'Authorization': `Bearer ${CHUNKR_API_KEY}`,
+                    'Authorization': `${CHUNKR_API_KEY}`,
                     'Accept': 'application/json',
                 },
                 mode: 'cors',
