@@ -5,7 +5,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="footer">
-      <p>&copy; {new Date().getFullYear()} Blood Pressure OCR. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} UCLA Health Blood Pressure OCR. All rights reserved.</p>
     </footer>
   );
 };
