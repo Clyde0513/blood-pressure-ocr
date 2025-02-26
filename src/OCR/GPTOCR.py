@@ -80,9 +80,9 @@ def extract_blood_pressure(image_path):
             model="gpt-4o", 
             messages=[
                 {
-                    "role": "user", "content": "User provided image for blood pressure extraction.",
+                    "role": "user", "`content": "User provided image for blood pressure extraction.",
                     "content": [
-                        {"type": "text", "text": f"""Extract blood pressure readings from the image.
+                        {"type": "text", "text": f"""Extract blood pressure readings from the imag`e with at least 80% accuracy. If image is to blurry or unclear, return null.
                                                 There's two tables, but look at the first table first for now.
                                                 The image contains a table with columns: Date (MM-DD), AM (Systolic/Diastolic), and PM (Systolic/Diastolic).
                                                 Return a JSON array of objects, where each object has the following fields:
@@ -132,8 +132,8 @@ def extract_blood_pressure(image_path):
 
 if __name__ == "__main__":
     # Example usage (replace with your image path)
-    image_file = "./IMG_9756.jpg"  # Replace with your image file
-    parsed_data = extract_blood_pressure(image_file)
+    image_path = "./IMG_6436.jpeg"  # Replace with your image file
+    parsed_data = extract_blood_pressure(image_path)
 
     if parsed_data:
         print(parsed_data)
